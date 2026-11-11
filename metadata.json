@@ -1,0 +1,6 @@
+{
+  "name": "AproVE — Preparação para o Ministério do Interior",
+  "description": "Página de vendas oficial da aplicação AproVE para candidatos ao Ministério do Interior em Angola.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
