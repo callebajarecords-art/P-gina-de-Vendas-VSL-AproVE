@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { MessageSquare, CheckCheck, UserCheck, Edit3, Sparkles } from 'lucide-react';
+import React from 'react';
+import { MessageSquare, CheckCheck, UserCheck } from 'lucide-react';
 import CTAButton from '@/components/CTAButton';
 
 interface TestimonialData {
@@ -13,9 +13,7 @@ interface TestimonialData {
 }
 
 export default function TestimonialsSection() {
-  const [editingCard, setEditingCard] = useState<number | null>(null);
-
-  const [testimonials, setTestimonials] = useState<TestimonialData[]>([
+  const testimonials: TestimonialData[] = [
     {
       name: 'Manuel Domingos Kiala',
       location: 'Luanda (Cazenga), Angola',
@@ -37,13 +35,7 @@ export default function TestimonialsSection() {
       message: 'Eu trabalho por turnos e não tenho como pagar centros de explicações presenciais que cobram mais de 35 ou 40 mil Kwanzas aqui no planalto. Ter o AproVE no meu smartphone permitiu-me estudar nos intervalos e ter uma rotina séria. Recomendo a qualquer jovem que queira entrar preparado e sem improvisos.',
       focusArea: 'Rotina de Estudos & Simulados',
     },
-  ]);
-
-  const handleUpdate = (index: number, field: keyof TestimonialData, value: string) => {
-    const updated = [...testimonials];
-    updated[index] = { ...updated[index], [field]: value };
-    setTestimonials(updated);
-  };
+  ];
 
   return (
     <section className="w-full py-16 sm:py-20 px-4 sm:px-6 bg-[#0B1528] border-t border-slate-800">
@@ -86,56 +78,25 @@ export default function TestimonialsSection() {
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => setEditingCard(editingCard === idx ? null : idx)}
-                  className="text-[10px] text-slate-400 hover:text-amber-300 flex items-center gap-1 bg-slate-800/80 px-2 py-1 rounded border border-slate-700 cursor-pointer transition-colors"
-                  title="Editar este depoimento"
-                >
-                  <Edit3 className="w-3 h-3" />
-                  <span>{editingCard === idx ? 'Fechar' : 'Editar'}</span>
-                </button>
+                <div className="flex items-center gap-1 text-[10px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-800/50">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
+                  <span>Verificado</span>
+                </div>
               </div>
 
               {/* Message Chat Bubble */}
               <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between bg-[#0B141A]/60">
-                {editingCard === idx ? (
-                  <div className="space-y-2 text-xs">
-                    <label className="text-slate-400 block font-semibold">Nome:</label>
-                    <input
-                      type="text"
-                      value={t.name}
-                      onChange={(e) => handleUpdate(idx, 'name', e.target.value)}
-                      className="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-white text-xs"
-                    />
-                    <label className="text-slate-400 block font-semibold">Localidade:</label>
-                    <input
-                      type="text"
-                      value={t.location}
-                      onChange={(e) => handleUpdate(idx, 'location', e.target.value)}
-                      className="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-white text-xs"
-                    />
-                    <label className="text-slate-400 block font-semibold">Texto do Depoimento:</label>
-                    <textarea
-                      rows={4}
-                      value={t.message}
-                      onChange={(e) => handleUpdate(idx, 'message', e.target.value)}
-                      className="w-full bg-slate-800 border border-slate-700 rounded p-1.5 text-white text-xs"
-                    />
-                  </div>
-                ) : (
-                  <div>
-                    <div className="bg-[#005C4B]/20 border border-[#005C4B]/40 rounded-xl p-3.5 text-slate-200 text-xs sm:text-sm leading-relaxed relative">
-                      <p className="italic text-slate-200">
-                        &ldquo;{t.message}&rdquo;
-                      </p>
-                      <div className="flex items-center justify-end gap-1 text-[10px] text-emerald-400/90 mt-2">
-                        <span>{t.date}</span>
-                        <CheckCheck className="w-3.5 h-3.5 text-emerald-400" />
-                      </div>
+                <div>
+                  <div className="bg-[#005C4B]/20 border border-[#005C4B]/40 rounded-xl p-3.5 text-slate-200 text-xs sm:text-sm leading-relaxed relative">
+                    <p className="italic text-slate-200">
+                      &ldquo;{t.message}&rdquo;
+                    </p>
+                    <div className="flex items-center justify-end gap-1 text-[10px] text-emerald-400/90 mt-2">
+                      <span>{t.date}</span>
+                      <CheckCheck className="w-3.5 h-3.5 text-emerald-400" />
                     </div>
                   </div>
-                )}
+                </div>
 
                 <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
                   <span className="font-medium text-amber-400">Foco: {t.focusArea}</span>

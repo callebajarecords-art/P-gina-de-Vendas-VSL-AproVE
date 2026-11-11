@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Gift, FileText, Compass, Database, Edit3, CheckCircle2 } from 'lucide-react';
+import React from 'react';
+import { Gift, FileText, Compass, Database, CheckCircle2 } from 'lucide-react';
 import CTAButton from '@/components/CTAButton';
 
 interface BonusItem {
@@ -13,37 +13,29 @@ interface BonusItem {
 }
 
 export default function BonusSection() {
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
-
-  const [bonuses, setBonuses] = useState<BonusItem[]>([
+  const bonuses: BonusItem[] = [
     {
       number: 'BÓNUS 1',
       badge: 'MATERIAL DE APOIO',
       title: 'Material de Apoio e Resumos Essenciais',
-      description: 'Espaço reservado para inserir a descrição do material complementar (ex: esquemas de síntese em formato PDF para revisão rápida dos pontos-chave antes das provas).',
+      description: 'Esquemas de síntese em formato PDF para revisão rápida e memorização dos pontos-chave de legislação antes das provas.',
       format: 'Documento Digital (PDF)',
     },
     {
       number: 'BÓNUS 2',
       badge: 'GUIA DE PREPARAÇÃO',
       title: 'Guia Estratégico de Estudos',
-      description: 'Espaço reservado para inserir a descrição do guia (ex: roteiro de planeamento semanal com divisão prática de matérias para gerir o teu tempo de estudo com antecedência).',
+      description: 'Roteiro de planeamento semanal com divisão prática de matérias para gerir o teu tempo de estudo com antecedência e disciplina.',
       format: 'Plano de Estudos Passo a Passo',
     },
     {
       number: 'BÓNUS 3',
       badge: 'RECURSO EXTRA',
       title: 'Banco Suplementar de Questões Práticas',
-      description: 'Espaço reservado para inserir a descrição do recurso (ex: compilação extra de exercícios comentados para reforçar o treino das disciplinas com maior peso).',
+      description: 'Compilação extra de exercícios comentados para reforçar o treino das disciplinas com maior peso e critérios eliminatórios.',
       format: 'Módulo Prático na Aplicação',
     },
-  ]);
-
-  const handleUpdateBonus = (index: number, field: keyof BonusItem, value: string) => {
-    const updated = [...bonuses];
-    updated[index] = { ...updated[index], [field]: value };
-    setBonuses(updated);
-  };
+  ];
 
   return (
     <section className="w-full py-16 sm:py-20 px-4 sm:px-6 bg-[#070D18]">
@@ -58,7 +50,7 @@ export default function BonusSection() {
             E AINDA <span className="text-amber-400">NÃO ACABOU...</span>
           </h2>
           <p className="text-base sm:text-lg text-slate-300 mt-3 max-w-2xl mx-auto leading-relaxed">
-            Ao adquirires o AproVE, poderás ter acesso aos materiais e recursos adicionais incluídos na oferta.
+            Ao adquirires o AproVE, terás acesso imediato aos materiais e recursos adicionais incluídos na oferta.
           </p>
           <div className="w-16 h-1 bg-amber-400 mx-auto rounded-full mt-4" />
         </div>
@@ -91,51 +83,21 @@ export default function BonusSection() {
                   <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
                     {b.badge}
                   </span>
-                  <button
-                    type="button"
-                    onClick={() => setEditingIndex(editingIndex === idx ? null : idx)}
-                    className="text-[11px] text-slate-400 hover:text-amber-300 flex items-center gap-1 bg-slate-900 px-2 py-1 rounded border border-slate-700 cursor-pointer transition-colors"
-                  >
-                    <Edit3 className="w-3 h-3" />
-                    <span>{editingIndex === idx ? 'Fechar' : 'Editar Bónus'}</span>
-                  </button>
+                  <span className="text-[10px] text-emerald-400 font-semibold bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded">
+                    100% Gratuito
+                  </span>
                 </div>
 
-                {editingIndex === idx ? (
-                  <div className="space-y-2 pt-2 text-xs">
-                    <input
-                      type="text"
-                      value={b.title}
-                      onChange={(e) => handleUpdateBonus(idx, 'title', e.target.value)}
-                      className="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-white font-bold"
-                    />
-                    <textarea
-                      rows={3}
-                      value={b.description}
-                      onChange={(e) => handleUpdateBonus(idx, 'description', e.target.value)}
-                      className="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-white"
-                    />
-                    <input
-                      type="text"
-                      value={b.format}
-                      onChange={(e) => handleUpdateBonus(idx, 'format', e.target.value)}
-                      className="w-full bg-slate-900 border border-slate-700 rounded p-1.5 text-amber-300"
-                    />
-                  </div>
-                ) : (
-                  <>
-                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-amber-300 transition-colors">
-                      {b.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                      {b.description}
-                    </p>
-                    <div className="flex items-center gap-2 pt-2 text-xs text-emerald-400 font-medium">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                      <span>{b.format}</span>
-                    </div>
-                  </>
-                )}
+                <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-amber-300 transition-colors">
+                  {b.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  {b.description}
+                </p>
+                <div className="flex items-center gap-2 pt-2 text-xs text-emerald-400 font-medium">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span>{b.format}</span>
+                </div>
               </div>
             </div>
           ))}
